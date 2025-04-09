@@ -1,10 +1,9 @@
 package ru.spring.dto;
 
-import lombok.Data;
 
 import java.util.List;
 
-@Data
+
 public class PostResponseDTO {
     private String id;
     private String title;

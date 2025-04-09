@@ -23,7 +23,7 @@ public class ProxyController {
 
     @PostConstruct
     public void init() {
-        channel = ManagedChannelBuilder.forTarget("localhost:50050").usePlaintext().build();
+        channel = ManagedChannelBuilder.forTarget("postservice:50050").usePlaintext().build();
         stub = PostServiceGrpc.newBlockingStub(channel);
     }
 

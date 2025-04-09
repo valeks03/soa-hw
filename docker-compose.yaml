@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  proxyservice:
+    image: proxy_image
+    container_name: proxyservice
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postservice
+    environment:
+      # Пример: переменная для адреса PostService
+      - POST_SERVICE_HOST=postservice
+      - POST_SERVICE_PORT=50050
+
+  postservice:
+    image: post_image
+    container_name: postservice
+    ports:
+      - "50050:50050"

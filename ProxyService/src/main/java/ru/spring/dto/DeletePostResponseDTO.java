@@ -1,6 +1,5 @@
 package ru.spring.dto;
 
-import lombok.Data;
 
 
 public class DeletePostResponseDTO {

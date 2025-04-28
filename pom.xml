@@ -13,6 +13,7 @@
     <modules>
         <module>PostService</module>
         <module>ProxyService</module>
+        <module>CommentService</module>
     </modules>
 
     <properties>

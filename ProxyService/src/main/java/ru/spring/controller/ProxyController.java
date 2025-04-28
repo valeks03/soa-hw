@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.social_network.PostOuterClass;
 import com.example.social_network.PostServiceGrpc;
 
-import ru.spring.dto.*;
+import ru.spring.dto.postservice.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

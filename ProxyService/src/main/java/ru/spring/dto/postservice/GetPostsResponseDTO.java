@@ -1,4 +1,4 @@
-package ru.spring.dto;
+package ru.spring.dto.postservice;
 
 
 import java.util.List;

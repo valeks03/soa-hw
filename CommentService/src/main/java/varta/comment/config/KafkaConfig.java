@@ -11,8 +11,26 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Bean
-    NewTopic createTopic() {
+    NewTopic likeTopic() {
         return TopicBuilder.name("like-event")
+                .partitions(3)
+                .replicas(3)
+                .configs(Map.of("min.insync.replicas", "2"))
+                .build();
+    }
+
+    @Bean
+    NewTopic viewTopic() {
+        return TopicBuilder.name("view-event")
+                .partitions(3)
+                .replicas(3)
+                .configs(Map.of("min.insync.replicas", "2"))
+                .build();
+    }
+
+    @Bean
+    NewTopic commentTopic() {
+        return TopicBuilder.name("comment-event")
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas", "2"))

@@ -12,7 +12,7 @@ service CommentService {
 
 message ViewPostRequest {
   string post_id = 1;     // ID поста
-  string client_id = 2;   // ID клиента, который просматривает
+  string user_id = 2;   // ID клиента, который просматривает
 }
 
 // Ответ на просмотр поста
@@ -34,7 +34,7 @@ message LikePostResponse {
 message CommentPostRequest {
   string post_id = 1;
   string user_id = 2;
-  string comment = 3;
+  string content = 3;
 }
 
 message CommentPostResponse {

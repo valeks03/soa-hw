@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PostController.class)
-public class ProxyControllerTest {
+public class PostControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

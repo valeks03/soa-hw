@@ -16,21 +16,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
-public class ProxyController {
+public class PostController {
 
-    private ManagedChannel channel;
-    private PostServiceGrpc.PostServiceBlockingStub stub;
+    private ManagedChannel postChannel;
+    private PostServiceGrpc.PostServiceBlockingStub postStub;
 
     @PostConstruct
     public void init() {
-        channel = ManagedChannelBuilder.forTarget("postservice:50050").usePlaintext().build();
-        stub = PostServiceGrpc.newBlockingStub(channel);
+        postChannel = ManagedChannelBuilder.forTarget("postservice:50050").usePlaintext().build();
+        postStub = PostServiceGrpc.newBlockingStub(postChannel);
     }
 
     @PreDestroy
     public void shutdown() {
-        if (channel != null && !channel.isShutdown()) {
-            channel.shutdownNow();
+        if (postChannel != null && !postChannel.isShutdown()) {
+            postChannel.shutdownNow();
         }
     }
 
@@ -44,7 +44,7 @@ public class ProxyController {
                 .addAllTags(requestDTO.getTags())
                 .build();
 
-        PostOuterClass.CreatePostResponse grpcResponse = stub.createPost(grpcRequest);
+        PostOuterClass.CreatePostResponse grpcResponse = postStub.createPost(grpcRequest);
         return convertToDto(grpcResponse.getPost());
     }
 
@@ -54,7 +54,7 @@ public class ProxyController {
                 .newBuilder()
                 .setId(id)
                 .build();
-        PostOuterClass.GetPostByIdResponse grpcResponse = stub.getPostById(grpcRequest);
+        PostOuterClass.GetPostByIdResponse grpcResponse = postStub.getPostById(grpcRequest);
         return convertToDto(grpcResponse.getPost());
     }
 
@@ -66,7 +66,7 @@ public class ProxyController {
                 .setPage(page)
                 .setPageSize(pageSize)
                 .build();
-        PostOuterClass.GetPostsResponse grpcResponse = stub.getPosts(grpcRequest);
+        PostOuterClass.GetPostsResponse grpcResponse = postStub.getPosts(grpcRequest);
 
         List<PostResponseDTO> posts = grpcResponse.getPostsList().stream()
                 .map(this::convertToDto)
@@ -93,7 +93,7 @@ public class ProxyController {
                 .addAllTags(requestDTO.getTags())
                 .build();
 
-        PostOuterClass.UpdatePostResponse grpcResponse = stub.updatePost(grpcRequest);
+        PostOuterClass.UpdatePostResponse grpcResponse = postStub.updatePost(grpcRequest);
         return convertToDto(grpcResponse.getPost());
     }
 
@@ -103,7 +103,7 @@ public class ProxyController {
                .newBuilder()
                .setId(id)
                .build();
-       PostOuterClass.DeletePostResponse grpcResponse =  stub.deletePost(grpcRequest);
+       PostOuterClass.DeletePostResponse grpcResponse =  postStub.deletePost(grpcRequest);
 
        DeletePostResponseDTO responseDto = new DeletePostResponseDTO();
        responseDto.setSuccess(grpcResponse.getSuccess());

@@ -25,14 +25,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ProxyController.class)
+@WebMvcTest(PostController.class)
 public class ProxyControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ProxyController proxyController;
+    private PostController proxyController;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -44,7 +44,7 @@ public class ProxyControllerTest {
     public void setUp() {
         stubMock = Mockito.mock(PostServiceGrpc.PostServiceBlockingStub.class);
         // Заменяем приватное поле stub в ProxyController на наш mock
-        ReflectionTestUtils.setField(proxyController, "stub", stubMock);
+        ReflectionTestUtils.setField(proxyController, "postStub", stubMock);
     }
 
     @Test

@@ -10,7 +10,7 @@ RUN mvn clean package -DskipTests
 
 ENTRYPOINT ["top", "-b"]
 
-FROM maven:3.9.9-eclipse-temurin-23
+FROM eclipse-temurin:23-jre-alpine AS runtime
 
 WORKDIR /app
 

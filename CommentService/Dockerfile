@@ -6,7 +6,8 @@ COPY pom.xml ./
 RUN mvn dependency:go-offline
 
 COPY src ./src
-RUN mvn clean package -DskipTests
+# этот слой будет «сквошен» в один
+RUN mvn -B clean package -DskipTests
 
 ENTRYPOINT ["top", "-b"]
 

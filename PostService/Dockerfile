@@ -7,7 +7,6 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package
 
-# Шаг 2: финальный образ с OpenJDK
 FROM eclipse-temurin:23-jre-alpine AS runtime
 WORKDIR /app
 
@@ -17,5 +16,4 @@ COPY --from=build /app/target/PostService-1.0-SNAPSHOT.jar /app/PostService.jar
 
 EXPOSE 50050
 
-# Запускаем наше приложение
 CMD ["java", "-jar", "/app/PostService.jar"]
